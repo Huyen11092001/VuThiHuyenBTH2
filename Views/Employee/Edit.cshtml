@@ -1,0 +1,83 @@
+@model VuThiHuyenBTH2.Models.Employee
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<h4>Sửa thông tin Employee</h4>
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type ="hidden" asp-for="EmployeeID" />
+            <div class ="form-group">
+                <label asp-for="EmployeeName" class="control-label"></label>
+                <input asp-for="EmployeeName" class="form-control"/>
+                <span asp-validation-for="EmployeeName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a class="btn btn-success" asp-action="Index">Danh sách Employee </a>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+
+
+
+
+    @* // GET: Employee/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null || _context.Employee == null)
+            {
+                return View ("NotFound");
+            }
+
+            var employee = await _context.Employee.FindAsync(id);
+            if (employee == null)
+            {
+                return View ("NotFound");
+            }
+            return View(employee);
+        }
+
+        // POST: Employee/Edit/5
+        // To protect from overposting attack//go.microsoft.com/fwlink/?LinkId=317598.s, enable the specific properties you want to bind to.
+        // For more details, see http:
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,ReleaseDate,Genre,Price")] Employee employee)
+        {
+            if (id != employee.Id)
+            {
+                return View ("NotFound");
+}
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(employee);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!EmployeeExists(employee.Id))
+                    {
+                        return View ("NotFound");
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(employee);
+        } *@

@@ -21,13 +21,6 @@ namespace VuThiHuyenBTH2.Migrations
                     b.Property<string>("CustomerID")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("CustomerAddress")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("CustomerAge")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("CustomerName")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -54,10 +47,6 @@ namespace VuThiHuyenBTH2.Migrations
             modelBuilder.Entity("VuThiHuyenBTH2.Models.Person", b =>
                 {
                     b.Property<string>("PersonID")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PersonAddress")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PersonName")

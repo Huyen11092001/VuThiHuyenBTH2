@@ -1,15 +1,27 @@
-<form asp-action="Create">
-    <label>Customer ID: </label>
-    <input type="text" name="CustomerID">
-    <br>
-    <label>Customer Name: </label>
-    <input type="text" name="CustomerName">
-    <br>
-     <label>Customer Age: </label>
-    <input type="number" name="CustomerAge">
-    <br>
-     <label>Customer Address: </label>
-    <input type="text" name="CustomerAddress">
-    <br>
-    <input type="submit" value="Create">
-</form>
+@model VuThiHuyenBTH2.Models.Customer
+<h1>Tạo mới một sinh viên</h1>
+<hr>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CustomerID" class="control-label"></label>
+                <input asp-for="CustomerID" class="form-control">
+                <span asp-validation-for="CustomerID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                 <label asp-for="CustomerName" class="control-label"></label>
+                <input asp-for="CustomerName" class="form-control">
+                <span asp-validation-for="CustomerName" class="text-danger"></span>
+            </div>
+            <br>
+            <div class="form-group">
+                <input class="btn btn-primary" type="submit" value="Save">
+                <a class="btn btn-success" asp-action="Index">Danh sách Person</a>
+            </div>
+        </form>
+
+    </div>
+
+</div>

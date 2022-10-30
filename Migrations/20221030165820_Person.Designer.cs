@@ -10,13 +10,27 @@ using VuThiHuyenBTH2.Data;
 namespace VuThiHuyenBTH2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221011164728_Person")]
+    [Migration("20221030165820_Person")]
     partial class Person
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.10");
+
+            modelBuilder.Entity("VuThiHuyenBTH2.Models.Customer", b =>
+                {
+                    b.Property<string>("CustomerID")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CustomerName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CustomerID");
+
+                    b.ToTable("Customers");
+                });
 
             modelBuilder.Entity("VuThiHuyenBTH2.Models.Employee", b =>
                 {
@@ -35,10 +49,6 @@ namespace VuThiHuyenBTH2.Migrations
             modelBuilder.Entity("VuThiHuyenBTH2.Models.Person", b =>
                 {
                     b.Property<string>("PersonID")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PersonAddress")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PersonName")
