@@ -283,3 +283,7 @@ C:\Users\Dell\VuThiHuyenBTH2\obj\Debug\net6.0\refint\VuThiHuyenBTH2.dll
 C:\Users\Dell\VuThiHuyenBTH2\obj\Debug\net6.0\VuThiHuyenBTH2.pdb
 C:\Users\Dell\VuThiHuyenBTH2\obj\Debug\net6.0\VuThiHuyenBTH2.genruntimeconfig.cache
 C:\Users\Dell\VuThiHuyenBTH2\obj\Debug\net6.0\ref\VuThiHuyenBTH2.dll
+C:\Users\Dell\VuThiHuyenBTH2\bin\Debug\net6.0\EPPlus.dll
+C:\Users\Dell\VuThiHuyenBTH2\bin\Debug\net6.0\EPPlus.Interfaces.dll
+C:\Users\Dell\VuThiHuyenBTH2\bin\Debug\net6.0\EPPlus.System.Drawing.dll
+C:\Users\Dell\VuThiHuyenBTH2\bin\Debug\net6.0\Microsoft.IO.RecyclableMemoryStream.dll
