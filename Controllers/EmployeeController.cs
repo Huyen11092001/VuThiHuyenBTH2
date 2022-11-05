@@ -4,7 +4,9 @@ using VuThiHuyenBTH2.Data;
 using VuThiHuyenBTH2.Models.Process;
 using VuThiHuyenBTH2.Models;
 
-public class EmployeeController : Controller
+namespace VuThiHuyenBTH2.Controllers
+{
+    public class EmployeeController : Controller
     {
         private readonly ApplicationDbContext _context;
         private ExcelsProcess _excelProcess = new ExcelsProcess();
@@ -44,7 +46,7 @@ public class EmployeeController : Controller
                         //save file to server
                         await file.CopyToAsync(stream);
                         // read data from
-                        var dt =_excelProcess.ExcelToDataTable(fileExtension);
+                        var dt = _excelProcess.ExcelToDataTable(fileLocation);
                         //using for loop to read data from dt
                         for (int i=0; i< dt.Rows.Count;i++)
                         {
@@ -52,7 +54,7 @@ public class EmployeeController : Controller
                             var emp = new Employee();
                             // set values for attrinutes
                             emp.EmployeeID= dt.Rows[i][0].ToString();
-                             emp.EmployeeName= dt.Rows[i][1].ToString();
+                            emp.EmployeeName= dt.Rows[i][1].ToString();
                              //add object to Context
                              _context.Employees.Add(emp);
                         }
@@ -69,6 +71,9 @@ public class EmployeeController : Controller
             return _context.Employees.Any(e =>e.EmployeeID ==id);
         }
     }
+}
+
+
     //     public async Task<IActionResult> Create (Employee emp)
     //     {
     //         if(ModelState.IsValid)

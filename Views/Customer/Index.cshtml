@@ -1,21 +1,37 @@
 @model IEnumerable<VuThiHuyenBTH2.Models.Customer>
+    @{
+        ViewData["Title"] ="Index";
+    }
+    <h1>Index</h1>
     <p>
-        <a class="btn btn-success" asp-action="Create">Create a new Customer</a>
+        <a asp-action="Upload">Create New</a>
     </p>
-    <table class=" table table-all">
-        <tr>
-            <th>Customer ID</th>
-            <th>Customer Name</th>
-        </tr>
-        @foreach (var item in Model)
+    <table class=" table ">
+        <thead>
+            <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerName)
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            </tr>
+        </thead>
+       <tbody>
+ @foreach (var item in Model)
         {
         <tr>
-            <td>@Html.DisplayFor(m => item.CustomerID)</td>
+           
             <td>@Html.DisplayFor(m => item.CustomerName)</td>
+            <td>@Html.DisplayFor(modelItem => item.Address)</td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.CustomerID">Sửa</a>|
-                <a asp-action="Delete" asp-route-id="@item.CustomerID">Xóa</a>
+                <a asp-action="Edit" asp-route-id="@item.CustomerID">Edit</a>|
+                <a asp-action="Details" asp-route-id="@item.CustomerID">Details</a>|
+                <a asp-action="Delete" asp-route-id="@item.CustomerID">Delete</a>
+
             </td>
         </tr>
         }
+       </tbody>
+       
     </table>

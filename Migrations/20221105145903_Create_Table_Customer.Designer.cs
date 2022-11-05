@@ -10,8 +10,8 @@ using VuThiHuyenBTH2.Data;
 namespace VuThiHuyenBTH2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221030165820_Person")]
-    partial class Person
+    [Migration("20221105145903_Create_Table_Customer")]
+    partial class Create_Table_Customer
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,6 +21,10 @@ namespace VuThiHuyenBTH2.Migrations
             modelBuilder.Entity("VuThiHuyenBTH2.Models.Customer", b =>
                 {
                     b.Property<string>("CustomerID")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CustomerName")
@@ -51,6 +55,10 @@ namespace VuThiHuyenBTH2.Migrations
                     b.Property<string>("PersonID")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("PersonName")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -63,6 +71,10 @@ namespace VuThiHuyenBTH2.Migrations
             modelBuilder.Entity("VuThiHuyenBTH2.Models.Student", b =>
                 {
                     b.Property<string>("StudentID")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("StudentName")

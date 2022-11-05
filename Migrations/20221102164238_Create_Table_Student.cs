@@ -4,23 +4,23 @@
 
 namespace VuThiHuyenBTH2.Migrations
 {
-    public partial class Person : Migration
+    public partial class Create_Table_Student : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "PersonAddress",
-                table: "Persons");
+            migrationBuilder.AddColumn<string>(
+                name: "Address",
+                table: "Students",
+                type: "TEXT",
+                nullable: false,
+                defaultValue: "");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "PersonAddress",
-                table: "Persons",
-                type: "TEXT",
-                nullable: false,
-                defaultValue: "");
+            migrationBuilder.DropColumn(
+                name: "Address",
+                table: "Students");
         }
     }
 }
