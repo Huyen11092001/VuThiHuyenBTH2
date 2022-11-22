@@ -3,12 +3,18 @@
         ViewData["Title"] ="Index";
     }
     <h1>Index</h1>
+     <p>
+        <a asp-action="Create">Create New</a>
+    </p>
     <p>
-        <a asp-action="Upload">Create New</a>
+        <a asp-action="Upload">Upload New</a>
     </p>
     <table class=" table ">
         <thead>
             <tr>
+                <th>
+                @Html.DisplayNameFor(model => model.EmployeeID)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.EmployeeName)
             </th>
@@ -18,7 +24,7 @@
  @foreach (var item in Model)
         {
         <tr>
-           
+           <td>@Html.DisplayFor(m => item.EmployeeID)</td>
             <td>@Html.DisplayFor(m => item.EmployeeName)</td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.EmployeeID">Edit</a>|

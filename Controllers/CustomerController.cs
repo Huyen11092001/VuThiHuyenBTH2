@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using VuThiHuyenBTH2.Data;
 using VuThiHuyenBTH2.Models.Process;
 using VuThiHuyenBTH2.Models;
+namespace VuThiHuyenBTH2.Controllers
+{
 public class CustomerController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -70,23 +72,25 @@ public class CustomerController : Controller
          {
             return _context.Customers.Any(e =>e.CustomerID ==id);
          }
-    }
-    //     public IActionResult Create()
-    //     {
-    //         return View();
-    //     }
-    //     [HttpPost]
-    //     public async Task<IActionResult> Create (Customer cus)
-    //     {
-    //         if(ModelState.IsValid)
-    //         {
-    //             _context.Add(cus);
-    //             await _context.SaveChangesAsync();
-    //             return RedirectToAction(nameof(Index));
-    //         }
-    //         return View(cus);
+             public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create (Customer cus)
+        {
+            if(ModelState.IsValid)
+            {
+                _context.Add(cus);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(cus);
             
-    //     }
+        }
+    }
+}
+    
     //     // GET: Student/Edit/5
     //     public async Task<IActionResult> Edit(string id)
     //     {

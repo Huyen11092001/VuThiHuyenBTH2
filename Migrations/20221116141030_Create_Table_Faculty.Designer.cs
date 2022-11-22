@@ -10,8 +10,8 @@ using VuThiHuyenBTH2.Data;
 namespace VuThiHuyenBTH2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221105145903_Create_Table_Customer")]
-    partial class Create_Table_Customer
+    [Migration("20221116141030_Create_Table_Faculty")]
+    partial class Create_Table_Faculty
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,6 +50,20 @@ namespace VuThiHuyenBTH2.Migrations
                     b.ToTable("Employees");
                 });
 
+            modelBuilder.Entity("VuThiHuyenBTH2.Models.Faculty", b =>
+                {
+                    b.Property<string>("FacultyID")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FacultyName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("FacultyID");
+
+                    b.ToTable("Faculty");
+                });
+
             modelBuilder.Entity("VuThiHuyenBTH2.Models.Person", b =>
                 {
                     b.Property<string>("PersonID")
@@ -77,13 +91,30 @@ namespace VuThiHuyenBTH2.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("FacultyID")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("StudentName")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("StudentID");
 
+                    b.HasIndex("FacultyID");
+
                     b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("VuThiHuyenBTH2.Models.Student", b =>
+                {
+                    b.HasOne("VuThiHuyenBTH2.Models.Faculty", "Faculty")
+                        .WithMany()
+                        .HasForeignKey("FacultyID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Faculty");
                 });
 #pragma warning restore 612, 618
         }

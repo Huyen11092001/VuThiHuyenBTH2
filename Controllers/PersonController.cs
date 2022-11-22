@@ -50,7 +50,7 @@ public class PersonController : Controller
                         //using for loop to read data from dt
                         for (int i=0; i< dt.Rows.Count;i++)
                         {
-                            //create a new Employee object
+                            //create a new Person object
                             var per = new Person();
                             // set values for attrinutes
                             per.PersonID= dt.Rows[i][0].ToString();
@@ -72,24 +72,25 @@ public class PersonController : Controller
         {
           return _context.Persons.Any(e =>e.PersonID ==id);
         }
+          public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create (Person std)
+        {
+            if(ModelState.IsValid)
+            {
+                _context.Add(std);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(std);
+            
+        }
    }
 }
-//        public IActionResult Create()
-//         {
-//             return View();
-//         }
-//         [HttpPost]
-//         public async Task<IActionResult> Create (Person std)
-//         {
-//             if(ModelState.IsValid)
-//             {
-//                 _context.Add(std);
-//                 await _context.SaveChangesAsync();
-//                 return RedirectToAction(nameof(Index));
-//             }
-//             return View(std);
-            
-//         }
+     
 //          // GET: Student/Edit/5
 //         public async Task<IActionResult> Edit(string id)
 //         {

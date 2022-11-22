@@ -1,0 +1,35 @@
+@model IEnumerable<VuThiHuyenBTH2.Models.Faculty>
+    @{
+        ViewData["Title"] ="Index";
+    }
+    <h1>Index</h1>
+     <p>
+        <a class="btn btn-success"asp-action="Create">Create a new Faculty</a>
+    </p>
+    <table class=" table table-all ">
+       
+            <tr>
+            <th> Faculty ID </th>
+            <th> Faculty Name </th>
+            </tr>
+       
+      
+ @foreach (var item in Model)
+        {
+        <tr>
+           
+            <td>@Html.DisplayFor(m => item.FacultyID)</td>
+              <td>@Html.DisplayFor(m => item.FacultyName)</td>
+           
+            
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.FacultyID">Edit</a>|
+                <a asp-action="Details" asp-route-id="@item.FacultyID">Details</a>|
+                <a asp-action="Delete" asp-route-id="@item.FacultyID">Delete</a>
+
+            </td>
+        </tr>
+        }
+      
+       
+    </table>

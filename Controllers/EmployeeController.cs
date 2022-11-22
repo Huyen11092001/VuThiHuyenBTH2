@@ -9,6 +9,7 @@ namespace VuThiHuyenBTH2.Controllers
     public class EmployeeController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private StringProcess StrPro = new StringProcess();
         private ExcelsProcess _excelProcess = new ExcelsProcess();
         public EmployeeController (ApplicationDbContext context)
         {
@@ -17,6 +18,7 @@ namespace VuThiHuyenBTH2.Controllers
         // GET: Employee
         public async Task<IActionResult> Index()
         {
+           
             return View (await _context.Employees.ToListAsync());
            
         }
@@ -50,7 +52,7 @@ namespace VuThiHuyenBTH2.Controllers
                         //using for loop to read data from dt
                         for (int i=0; i< dt.Rows.Count;i++)
                         {
-                            //create a new Employee object
+                            //create a new Customer object
                             var emp = new Employee();
                             // set values for attrinutes
                             emp.EmployeeID= dt.Rows[i][0].ToString();
@@ -70,21 +72,27 @@ namespace VuThiHuyenBTH2.Controllers
         {
             return _context.Employees.Any(e =>e.EmployeeID ==id);
         }
+         public IActionResult Create()
+        {
+             var id = _context.Employees.OrderByDescending(m =>m.EmployeeID).First().EmployeeID;
+             ViewBag.newkey = StrPro.AutoGenerateCode(id);
+            return View();
+        }
+        [HttpPost]
+          public async Task<IActionResult> Create (Employee emp)
+        {
+            if(ModelState.IsValid)
+            {
+                _context.Add(emp);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(emp);
+            
+        }
     }
 }
 
-
-    //     public async Task<IActionResult> Create (Employee emp)
-    //     {
-    //         if(ModelState.IsValid)
-    //         {
-    //             _context.Add(emp);
-    //             await _context.SaveChangesAsync();
-    //             return RedirectToAction(nameof(Index));
-    //         }
-    //         return View(emp);
-            
-    //     }
     //     // GET: Student/Edit/5
     //     public async Task<IActionResult> Edit(string id)
     //     {

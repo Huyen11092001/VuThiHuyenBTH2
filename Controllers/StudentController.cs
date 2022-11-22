@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using VuThiHuyenBTH2.Data;
 using VuThiHuyenBTH2.Models.Process;
 using VuThiHuyenBTH2.Models;
-
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace VuThiHuyenBTH2.Controllers
 {
@@ -11,6 +11,7 @@ namespace VuThiHuyenBTH2.Controllers
     {
         private readonly ApplicationDbContext _context;
         private ExcelsProcess _excelProcess = new ExcelsProcess();
+        private StringProcess strPro = new StringProcess();
         public StudentController (ApplicationDbContext context)
         {
             _context = context;
@@ -21,12 +22,42 @@ namespace VuThiHuyenBTH2.Controllers
             return View ( await _context.Students.ToListAsync());
           
         }
+       
+         public IActionResult Create()
+        {
+            var newStudentID = "STD001";
+            var countStudent = _context.Students.Count();
+            if(countStudent>0)
+            {
+                var studentID = _context.Students.OrderByDescending(m =>m.StudentID).First().StudentID;
+                // sinh ma tu dong
+                newStudentID = strPro.AutoGenerateCode(studentID);
+            }
+            ViewBag.newID = newStudentID;
+            ViewData["FacultyID"]=new SelectList (_context.Faculty, "FacultyID", "FacultyName");
+            return View(); 
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("StudentID,StudentName,Address,FacultyID")] Student student)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(student);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+
+            ViewData["FacultyID"] =new SelectList(_context.Faculty, "FacultyID", "FacultyName", student.FacultyID);
+            return View(student);
+        }
          public async Task<IActionResult>Upload()
         {
             return View();
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        // [HttpPost]
+        // [ValidateAntiForgeryToken]
+       
         public async Task<IActionResult>Upload(IFormFile file)
         {
             if (file!=null)
@@ -75,23 +106,8 @@ namespace VuThiHuyenBTH2.Controllers
            return _context.Students.Any(e =>e.StudentID ==id);
         }
     }
-}
-    //     public IActionResult Create()
-    //     {
-    //         return View();
-    //     }
-    //     [HttpPost]
-    //     public async Task<IActionResult> Create (Student std)
-    //     {
-    //         if(ModelState.IsValid)
-    //         {
-    //             _context.Add(std);
-    //             await _context.SaveChangesAsync();
-    //             return RedirectToAction(nameof(Index));
-    //         }
-    //         return View(std);
-            
-    //     }
+
+}       
     //     // GET: Student/Edit/5
     //     public async Task<IActionResult> Edit(string id)
     //     {

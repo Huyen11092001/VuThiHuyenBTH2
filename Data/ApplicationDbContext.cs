@@ -14,6 +14,7 @@ namespace VuThiHuyenBTH2.Data
         public DbSet<Employee> Employees {get; set;}
         public DbSet<Person> Persons {get; set;}
         public DbSet<Customer> Customers {get; set;}
+         public DbSet<Faculty> Faculty {get; set;}
     }
     
 }

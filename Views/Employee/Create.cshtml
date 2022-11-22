@@ -1,10 +1,11 @@
 @model VuThiHuyenBTH2.Models.Employee
-<h1>Tạo mới một sinh viên</h1>
+<h1>Tạo mới một nhân viên</h1>
 <hr>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="text" name="" id="@ViewBag.newkey" hidden>
             <div class="form-group">
                 <label asp-for="EmployeeID" class="control-label"></label>
                 <input asp-for="EmployeeID" class="form-control">
